@@ -43,5 +43,5 @@ data = data %>% rename(timestamp = Time) %>% select(-Date) %>%
 plot(data$timestamp, data$Global_active_power,
      type = 'l', xlab = "", ylab = "Global Active Power (kilowatts)")
 
-dev.copy2pdf(file = 'plot2.pdf')
+dev.copy(png, file = 'plot2.png')
 dev.off()

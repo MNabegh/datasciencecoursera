@@ -61,5 +61,5 @@ plot(data$timestamp, data$Global_reactive_power,
      type = 'l', xlab = "datetime", ylab = "lobal_reactive_power")
 
 
-dev.copy2pdf(file = 'plot4.pdf')
+dev.copy(png, file = 'plot4.png')
 dev.off()

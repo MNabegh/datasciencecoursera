@@ -49,5 +49,5 @@ legend("topright", col = c("black", "red", "blue"),
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
        lty = c(1, 1, 1))
 
-dev.copy2pdf(file = 'plot3.pdf')
+dev.copy(png, file = 'plot3.png')
 dev.off()
