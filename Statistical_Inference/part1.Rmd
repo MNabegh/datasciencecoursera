@@ -2,11 +2,7 @@
 title: 'Statistical Inference course project  part 1: Simulation Exercise'
 author: "Mahmoud Nabegh"
 date: "December 12, 2018"
-output:
-  pdf_document: default
-  word_document: default
-  html_document:
-    df_print: paged
+output: pdf_document
 toc: yes
 ---
 
@@ -14,6 +10,7 @@ toc: yes
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(warning = F)
 library(ggplot2)
+library(datasets)
 ```
 
 ## Overview

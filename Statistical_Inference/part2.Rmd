@@ -1,0 +1,88 @@
+---
+title: 'Statistical Inference course project  part 2: Basic Inferential Data Analysis'
+author: "Mahmoud Nabegh"
+date: "December 15, 2018"
+output: pdf_document
+toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = F)
+library(ggplot2)
+library(datasets)
+library(dplyr)
+```
+## Overview
+We use the ToothGrowth data to look at the tooth growth for 10 subjects when taking Orange Juice and Vitamin C with different doses.
+
+## Load the ToothGrowth data
+
+```{r}
+library(datasets)
+```
+
+## Exploratory analysis
+
+### Data structure
+First step is to take a quick look at the data and its structure
+```{r}
+dim(ToothGrowth)
+head(ToothGrowth)
+str(ToothGrowth)
+```
+
+### Data properties
+Next we look at some of the data properties such as:
+1. Missing data
+```{r}
+dim(ToothGrowth)[1]
+sum(complete.cases(ToothGrowth))
+```
+The data contains no missing values
+
+2. Boxplots to represent the 5 number summary for each group by dose
+
+```{r}
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+ggplot(ToothGrowth, aes(x = dose, y = len, fill = dose)) + geom_boxplot()
+```
+
+So there is very obvious increase in tooth length with increasing the dose.
+
+```{r}
+ggplot(ToothGrowth, aes(x = supp, y = len, fill = supp)) + geom_boxplot()
+```
+
+Orange juice treatment appears to give a more predictable and better result by having a higher median growth in length and a smaller range, but it is interesting to look at the extreme results of the Vitamin C in case the treatment works better for these cases.
+
+## Hypothesis testing
+Here we test the effect of the dose and the method of intaking Vitamin C on the teeth growth
+
+### Dose effect
+Our null hypothesis will be that different doses, do not affect the growth length, the data is not paired as they are for different subjects.
+```{r}
+t.test(ToothGrowth$len[which(ToothGrowth$dose == 1)], ToothGrowth$len[which(ToothGrowth$dose == .5)], paired = F)
+```
+
+The test shows the following:
+
+* The p-value < 0.05 which indicates signifacnt result and we reject the null hypothesis.
+* The confidence interval does not contain 0 therefore we can infer that a dose of 1 mg is better than 0.5 mg.
+
+```{r}
+t.test(ToothGrowth$len[which(ToothGrowth$dose == 2)], ToothGrowth$len[which(ToothGrowth$dose == 1)], paired = F)
+```
+
+The results of the 2 mg dose vs the 1 mg dose shows similar results that the 2 mg is better than the 1 mg.
+
+### The method of intake
+
+```{r}
+t.test(ToothGrowth$len[which(ToothGrowth$supp == "OJ")], ToothGrowth$len[which(ToothGrowth$supp == "VC")], paired = F)
+```
+
+The test shows the following:
+
+* The p-value > 0.05 which indicates non-signifacnt result and we fail to reject the null hypothesis, though it is relatively close to our $\alpha = 0.5$.
+* The confidence interval does contain 0 therefore the results is insignificant. 
