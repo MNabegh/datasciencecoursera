@@ -1,9 +1,0 @@
-1- John Gruber
-
-2- ‘‘‘{r}
-
-3- Set the 'fig.height' and 'fig.width' options for the code chunk
-
-4- Set the option results = "asis"|results="asis"
-
-5- Every time you knit() the R Markdown file, the HTML file will be overwritten
